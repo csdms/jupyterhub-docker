@@ -23,6 +23,11 @@ RUN mamba install --yes --file /tmp/requirements.in && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Build Landlab from source in the user's home directory
+RUN git clone --depth 1 --branch v2.9.2 https://github.com/landlab/landlab && \
+    pip install ./landlab && \
+    rm -rf ./landlab/build
+
 # Import matplotlib the first time to build the font cache
 RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
     fix-permissions "/home/${NB_USER}"
