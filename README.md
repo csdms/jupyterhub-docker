@@ -30,3 +30,12 @@ Visiting `http://<hostname>:8888/?token=<token>` in a browser loads JupyterLab, 
 
 * `hostname` is the name of the computer running Docker
 * `token` is the secret token printed in the console
+
+## What is the CSDMS Workbench?
+
+The CSDMS Workbench is the integrated system of software tools, technologies, and standards developed by CSDMS for building, interfacing, coupling, and running models.
+Learn more at https://csdms.colorado.edu/wiki/Workbench.
+
+## Acknowledgment
+
+This work is supported by the U.S. National Science Foundation under Award No. [2104102](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2104102), *Collaborative Research: Frameworks: OpenEarthscape - Transformative Cyberinfrastructure for Modeling and Simulation in the Earth-Surface Science Communities*.
