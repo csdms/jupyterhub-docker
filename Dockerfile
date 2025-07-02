@@ -17,7 +17,7 @@ RUN rm -rf "/home/${NB_USER}/.cache/"
 # Switch back to jovyan to avoid accidental container runs as root
 USER ${NB_UID}
 
-COPY requirements.in /tmp/requirements.in
+COPY --chown=${NB_UID}:${NB_GID} requirements.in /tmp/
 RUN mamba install --yes --file /tmp/requirements.in && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
@@ -25,8 +25,10 @@ RUN mamba install --yes --file /tmp/requirements.in && \
 
 # Build Landlab from source in the user's home directory
 RUN git clone --depth 1 --branch v2.9.2 https://github.com/landlab/landlab && \
-    pip install ./landlab && \
-    rm -rf ./landlab/build
+    pip install --no-cache-dir ./landlab && \
+    rm -rf ./landlab/build && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 # Import matplotlib the first time to build the font cache
 RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
