@@ -4,16 +4,16 @@
 
 # jupyterhub-docker
 
-A Docker image for a JupyterHub
-based on the [scipy-notebook][scipy-notebook] image
+Docker images for JupyterHubs
+based on the Project Jupyter [scipy-notebook][scipy-notebook] image
 with [CSDMS Workbench][csdms-workbench] software
 (Landlab, Basic Model Interface, Data Components) pre-installed.
 
 ## Build an image
 
-Build an image locally with:
+Build the base image locally with:
 ```sh
-docker build --tag csdms/jupyterhub .
+docker build --tag jupyterhub-base images/base
 ```
 The OS is Linux/Ubuntu.
 `conda` and `mamba`, as well as CSDMS Workbench software, are installed in `CONDA_DIR=/opt/conda`.
@@ -23,7 +23,7 @@ The *base* environment is activated.
 
 Run a container from this image:
 ```sh
-docker run -p 8888:8888 csdms/jupyterhub
+docker run -p 8888:8888 jupyterhub-base
 ```
 This starts a JupyterHub.
 Visiting `http://<hostname>:8888/?token=<token>` in a browser loads JupyterLab, where:
@@ -40,7 +40,7 @@ with the [release](./.github/workflows/release.yml) CI workflow.
 The workflow is only run when the repository is tagged.
 To manually build and push an update, run:
 ```
-docker buildx build --platform linux/amd64,linux/arm64 -t csdms/jupyterhub:latest --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t csdms/jupyterhub:latest --push images/base
 ```
 A user can pull this image from Docker Hub with:
 ```
