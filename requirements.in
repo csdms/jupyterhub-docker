@@ -1,4 +1,0 @@
-compilers
-bmi-topography
-bmi-geotiff
-# landlab  # No arm64 on conda-forge

@@ -1,0 +1,11 @@
+# CSDMS JupyterHub Helm chart configuration
+
+hub:
+  db:
+    type: sqlite-memory
+
+singleuser:
+  image:
+    name: csdms/jupyterhub
+    tag: 0.2.0
+  cmd: null
