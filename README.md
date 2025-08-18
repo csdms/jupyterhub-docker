@@ -23,7 +23,7 @@ The *base* environment is activated.
 
 Run a container from this image:
 ```sh
-docker run -p 8888:8888 jupyterhub-base
+docker run -p 8888:8888 --rm jupyterhub-base
 ```
 This starts a JupyterHub.
 Visiting `http://<hostname>:8888/?token=<token>` in a browser loads JupyterLab, where:
@@ -39,11 +39,11 @@ This image is automatically built and pushed to Docker Hub
 with the [release](./.github/workflows/release.yml) CI workflow.
 The workflow is only run when the repository is tagged.
 To manually build and push an update, run:
-```
+```sh
 docker buildx build --platform linux/amd64,linux/arm64 -t csdms/jupyterhub:latest --push images/base
 ```
 A user can pull this image from Docker Hub with:
-```
+```sh
 docker pull csdms/jupyterhub
 ```
 optionally with the `latest` tag or with a version tag.
