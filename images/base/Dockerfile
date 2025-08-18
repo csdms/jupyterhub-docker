@@ -18,10 +18,7 @@ RUN rm -rf "/home/${NB_USER}/.cache/"
 USER ${NB_UID}
 
 COPY --chown=${NB_UID}:${NB_GID} requirements.in /tmp/
-RUN mamba install --yes --file /tmp/requirements.in && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+RUN pip install --no-cache-dir -r /tmp/requirements.in
 
 # Build Landlab from source in the user's home directory
 RUN git clone --depth 1 --branch v2.9.2 https://github.com/landlab/landlab && \
