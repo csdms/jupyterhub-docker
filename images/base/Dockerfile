@@ -1,9 +1,10 @@
 # Set up a JupyterHub that includes all CSDMS Workbench software.
 FROM quay.io/jupyter/scipy-notebook:python-3.13.5
 
-LABEL maintainer="CSDMS <csdms@colorado.edu>"
-LABEL author="Mark Piper"
-LABEL email="mark.piper@colorado.edu"
+LABEL org.opencontainers.image.authors="Mark Piper <mark.piper@colorado.edu>"
+LABEL org.opencontainers.image.url="https://hub.docker.com/r/csdms/jupyterhub"
+LABEL org.opencontainers.image.source="https://github.com/csdms/jupyterhub-docker"
+LABEL org.opencontainers.image.vendor="CSDMS"
 
 USER root
 RUN apt-get update --yes && \
