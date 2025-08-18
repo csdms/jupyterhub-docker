@@ -20,12 +20,9 @@ USER ${NB_UID}
 COPY --chown=${NB_UID}:${NB_GID} requirements.in /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.in
 
-# Build Landlab from source in the user's home directory
-RUN git clone --depth 1 --branch v2.9.2 https://github.com/landlab/landlab && \
-    pip install --no-cache-dir ./landlab && \
-    rm -rf ./landlab/build && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+# Get the Landlab repo for the notebooks.
+RUN git clone --depth 1 --branch v2.10.1 https://github.com/landlab/landlab && \
+    rm -rf ./landlab/.git
 
 # Import matplotlib the first time to build the font cache
 RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
