@@ -1,5 +1,5 @@
 # Set up a JupyterHub that includes all CSDMS Workbench software.
-FROM quay.io/jupyter/scipy-notebook:python-3.12.11
+FROM quay.io/jupyter/scipy-notebook:python-3.13.5
 
 LABEL maintainer="CSDMS <csdms@colorado.edu>"
 LABEL author="Mark Piper"
