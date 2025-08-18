@@ -12,6 +12,10 @@ RUN apt-get update --yes && \
     rm -rf /var/lib/apt/lists/*
 USER ${NB_UID}
 
+# GDAL pip install failed on arm64. Use a conda binary instead.
+RUN mamba install -y gdal && \
+    mamba clean --all -f -y
+
 COPY --chown=${NB_UID}:${NB_GID} requirements.in /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.in
 
