@@ -8,7 +8,8 @@ LABEL org.opencontainers.image.vendor="CSDMS"
 USER root
 RUN apt-get update -y && \
     apt-get install -y \
-        libegl1-mesa-dev && \
+        libgl1-mesa-dev \
+        xvfb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 USER ${NB_UID}
@@ -24,3 +25,8 @@ RUN git clone --depth 1 https://github.com/gregtucker/landlab-pyvista-tools-exam
 ENV PYVISTA_TRAME_SERVER_PROXY_PREFIX='/proxy/'
 
 WORKDIR "${HOME}"
+
+# See https://github.com/kramergroup/jupyter-pyvista
+COPY start_xvfb.sh /sbin/start_xvfb.sh
+ENTRYPOINT ["tini", "-g", "--", "start_xvfb.sh"]
+CMD ["start-notebook.py"]
