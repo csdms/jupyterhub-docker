@@ -1,0 +1,11 @@
+# CSDMS JupyterHub+pyvista Helm chart configuration
+
+hub:
+  db:
+    type: sqlite-memory
+
+singleuser:
+  image:
+    name: csdms/jupyterhub-pyvista
+    tag: 0.1.0
+  cmd: null
